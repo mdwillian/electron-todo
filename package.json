@@ -2,6 +2,29 @@
   "name": "electron-todo",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "Fox Key",
+    "email": "electron-todo@gmail.com",
+    "url": "https://seu-site.com"
+  },
+  "homepage": "./",
+  "main": "public/electron.js",
+  "build": {
+    "appId": "com.electron.electron-todo",
+    "productName": "TodoList",
+    "copyright": "Copyright © 2019 FoxKey",
+    "mac": {
+      "category": "public.app-category.utilities"
+    },
+    "files": [
+      "app/**/*",
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
+  },
   "dependencies": {
     "electron-is-dev": "^1.1.0",
     "react": "^16.9.0",
@@ -10,11 +33,14 @@
     "styled-components": "^4.3.2"
   },
   "scripts": {
-    "dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron public/electron.js\"",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+    "postinstall": "electron-builder install-app-deps",
+    "preelectron-build": "yarn build",
+    "electron-build": "electron-builder -mwl"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -32,8 +58,12 @@
     ]
   },
   "devDependencies": {
+    "@rescripts/cli": "^0.0.12",
+    "@rescripts/rescript-env": "^0.0.10",
     "concurrently": "^4.1.2",
     "electron": "^6.0.8",
+    "electron-builder": "^21.2.0",
+    "typescript": "^3.6.3",
     "wait-on": "^3.3.0"
   }
 }
